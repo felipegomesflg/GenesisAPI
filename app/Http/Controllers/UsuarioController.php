@@ -25,7 +25,8 @@ class UsuarioController extends Controller
     $dado->cpf = $request->input('cpf');
     $dado->imagem = $request->input('imagem');
     $dado->usuario = $request->input('usuario');
-    $dado->senha = $request->input('senha');
+    if($request->isMethod('post'))
+    $dado->senha = md5($request->input('senha'));
 
     if($dado->save()){
         return new UsuarioResource($dado);
@@ -33,6 +34,15 @@ class UsuarioController extends Controller
 
   }
 
+  public function login(Request $request){
+
+        $dado = Usuario::where([
+            ['usuario','=',$request->usuario],['senha','=',md5($request->senha)],['usuarios.ativo','=',true]
+            ])->first();
+        if(!$dado)
+        return [];
+        return $dado;
+  }
 
   public function show($id)
   {

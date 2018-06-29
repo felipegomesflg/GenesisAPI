@@ -68,5 +68,6 @@ Route::delete('produto', 'ProdutoController@destroy');
 Route::get('usuarios', 'UsuarioController@index');
 Route::get('usuario/{id}', 'UsuarioController@show');
 Route::post('usuario', 'UsuarioController@store');
+Route::post('usuario/login', 'UsuarioController@login');
 Route::put('usuario', 'UsuarioController@store');
 Route::delete('usuario', 'UsuarioController@destroy');
